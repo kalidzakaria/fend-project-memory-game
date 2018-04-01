@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-
+const cardArray = Object.values(document.getElementsByClassName("card"));
 
 /*
  * Display the cards on the page
@@ -9,6 +9,15 @@
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+
+function shuffleCards(){
+	const shuffledArray = shuffle(cardArray);
+	const myDocFrag = document.createDocumentFragment();
+	for (let M=0; M < shuffledArray.length; M++ ) {
+		myDocFrag.appendChild(shuffledArray[M]);
+	}
+	document.querySelector(".deck").appendChild(myDocFrag);
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -25,6 +34,7 @@ function shuffle(array) {
     return array;
 }
 
+shuffleCards(); //To shuffle the cards each time the browser loads
 
 /*
  * set up the event listener for a card. If a card is clicked:
