@@ -46,3 +46,14 @@ shuffleCards(); //To shuffle the cards each time the browser loads
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+//Event listner for cards
+document.querySelector(".deck").addEventListener("click", cardClicked);
+
+function cardClicked(event) {
+	showCard(event);
+}
+
+function showCard(event) {
+	event.target.classList.add("open", "show");
+}
