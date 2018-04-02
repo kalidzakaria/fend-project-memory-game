@@ -47,17 +47,22 @@ shuffleCards(); //To shuffle the cards each time the browser loads
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-//Event listner for cards
-document.querySelector(".deck").addEventListener("click", cardClicked);
+document.querySelector(".deck").addEventListener("click", cardClicked); //Event listner for cards
+let cardList = []; //array of open cards, contains clicked cards
 
 function cardClicked(event) {
+	//Prevent adding open or matched cards
 	if (event.target.tagName === "LI" && !(event.target.classList.contains("match") || event.target.classList.contains("open"))) {
 		showCard(event);
 		addCardToList(event,cardList);
 		if (cardList.length === 2) {
 			let item0 = cardList[0].firstElementChild.classList.value;
 			let item1 = cardList[1].firstElementChild.classList.value;
-			item0 === item1 ? matched() : notMatched();
+			if (item0 === item1) {
+				matched();
+			} else {
+				notMatched();
+			}
 		}
 	}
 }
@@ -66,7 +71,6 @@ function showCard(event) {
 	event.target.classList.add("open", "show");
 }
 
-let cardList = [];
 function addCardToList(event,cardList) {
 	cardList.push(event.target);
 }
@@ -74,9 +78,17 @@ function addCardToList(event,cardList) {
 function matched() {
 	cardList[0].classList.add("match");
 	cardList[1].classList.add("match");
-	let i = 0;
-		while (i < 2){
-			cardList.pop();
-			i += 1;
-		}
+	cardList = [];
 }
+
+function notMatched() {
+	cardList[0].classList.add("notmatched");
+	cardList[1].classList.add("notmatched");
+	setTimeout(removeClasses, 800 );
+	
+}
+function removeClasses() {
+				cardList[0].classList.remove("open", "show", "notmatched");
+				cardList[1].classList.remove("open", "show", "notmatched");
+				cardList = [];
+			}
