@@ -71,3 +71,13 @@ function addCardToList(event,cardList) {
 	cardList.push(event.target);
 }
 
+function matched() {
+	console.log("MAAAATCH");
+	cardList[0].classList.add("match");
+	cardList[1].classList.add("match");
+	let i = 0;
+		while (i < 2){
+			cardList.pop();
+			i += 1;
+		}
+}
