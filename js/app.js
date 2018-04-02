@@ -72,7 +72,6 @@ function addCardToList(event,cardList) {
 }
 
 function matched() {
-	console.log("MAAAATCH");
 	cardList[0].classList.add("match");
 	cardList[1].classList.add("match");
 	let i = 0;
