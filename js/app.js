@@ -53,7 +53,7 @@ let cardList = []; //array of open cards, contains clicked cards
 function cardClicked(event) {
 	//Prevent adding open or matched cards
 	if (event.target.tagName === "LI" && !(event.target.classList.contains("match") || event.target.classList.contains("open"))) {
-		showCard(event);
+		if (cardList.length < 2) {showCard(event);} //Prevent showing three cards bug
 		addCardToList(event,cardList);
 		if (cardList.length === 2) {
 			let item0 = cardList[0].firstElementChild.classList.value;
