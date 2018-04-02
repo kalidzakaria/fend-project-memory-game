@@ -59,6 +59,7 @@ function cardClicked(event) {
 		addCardToList(event,cardList);
 		if (cardList.length === 2) {
 			incMoveCounter();
+			stars(); // update Stars
 			let item0 = cardList[0].firstElementChild.classList.value;
 			let item1 = cardList[1].firstElementChild.classList.value;
 			if (item0 === item1) {
@@ -100,4 +101,15 @@ function removeClasses() {
 function incMoveCounter() {
 	moveCounter += 1;
 	document.querySelector(".moves").innerText = moveCounter;
+}
+
+function stars() {
+	if (moveCounter > 15) {
+		let evaluation = document.getElementsByClassName("fa-star");
+		evaluation[2].classList.add("fa-star-o");		
+	}
+	if (moveCounter > 25) {
+		let evaluation = document.getElementsByClassName("fa-star");
+		evaluation[1].classList.add("fa-star-o");		
+	}
 }
