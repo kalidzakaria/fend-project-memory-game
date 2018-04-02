@@ -51,9 +51,18 @@ shuffleCards(); //To shuffle the cards each time the browser loads
 document.querySelector(".deck").addEventListener("click", cardClicked);
 
 function cardClicked(event) {
-	showCard(event);
+	if (event.target.tagName === "LI" && !(event.target.classList.contains("match") || event.target.classList.contains("open"))) {
+		showCard(event);
+		addCardToList(event,cardList);
+	}
 }
 
 function showCard(event) {
 	event.target.classList.add("open", "show");
 }
+
+let cardList = [];
+function addCardToList(event,cardList) {
+	cardList.push(event.target);
+}
+
