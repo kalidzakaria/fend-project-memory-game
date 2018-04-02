@@ -49,6 +49,8 @@ shuffleCards(); //To shuffle the cards each time the browser loads
 
 document.querySelector(".deck").addEventListener("click", cardClicked); //Event listner for cards
 let cardList = []; //array of open cards, contains clicked cards
+let moveCounter = 0;
+let matchedCards = 0;
 
 function cardClicked(event) {
 	//Prevent adding open or matched cards
@@ -56,6 +58,7 @@ function cardClicked(event) {
 		if (cardList.length < 2) {showCard(event);} //Prevent showing three cards bug
 		addCardToList(event,cardList);
 		if (cardList.length === 2) {
+			incMoveCounter();
 			let item0 = cardList[0].firstElementChild.classList.value;
 			let item1 = cardList[1].firstElementChild.classList.value;
 			if (item0 === item1) {
@@ -79,6 +82,7 @@ function matched() {
 	cardList[0].classList.add("match");
 	cardList[1].classList.add("match");
 	cardList = [];
+	matchedCards += 1;
 }
 
 function notMatched() {
@@ -92,3 +96,8 @@ function removeClasses() {
 				cardList[1].classList.remove("open", "show", "notmatched");
 				cardList = [];
 			}
+
+function incMoveCounter() {
+	moveCounter += 1;
+	document.querySelector(".moves").innerText = moveCounter;
+}
