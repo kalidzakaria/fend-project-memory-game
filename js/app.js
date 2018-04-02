@@ -54,6 +54,11 @@ function cardClicked(event) {
 	if (event.target.tagName === "LI" && !(event.target.classList.contains("match") || event.target.classList.contains("open"))) {
 		showCard(event);
 		addCardToList(event,cardList);
+		if (cardList.length === 2) {
+			let item0 = cardList[0].firstElementChild.classList.value;
+			let item1 = cardList[1].firstElementChild.classList.value;
+			item0 === item1 ? matched() : notMatched();
+		}
 	}
 }
 
