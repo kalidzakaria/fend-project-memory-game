@@ -86,7 +86,7 @@ function matched() {
 	cardList = [];
 	matchedCards += 1;
 	if (matchedCards === 8) {
-		winningScreen();
+		setTimeout(winningScreen,650);
 	}
 }
 
@@ -122,6 +122,7 @@ function stars() {
 }
 
 function winningScreen () {
+	
 	document.querySelector(".deck").style.display = "none";
 	document.querySelector(".score-panel").style.display = "none";
 	document.querySelector(".win-container").style.display = "flex";

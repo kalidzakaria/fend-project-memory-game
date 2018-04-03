@@ -146,9 +146,16 @@ h1 {
 	margin-left: auto;
 	margin-top: auto;
 	margin-bottom: auto;
-	height: 50%;
-	width: 50%;
-	
+	height: 60%;
+	width: 60%;
+	transform-origin: 0% 0%;
+	animation: winning .4s linear 0.1s;
+	perspective: 500px;
+}
+
+@keyframes winning {
+	0%   {opacity: 0; transform: rotateX(90deg)}
+    100% {opacity: 1; transform: rotateX(0)}
 }
 
 .winbtn {
@@ -156,7 +163,7 @@ h1 {
 	font-size: 1.25em;
 	width: 150px;
 	height: 50px;
-	background: #4CAF50;
+	background: #007700;
 	cursor: pointer;
 	border: none;
 	color: #ffffff;
@@ -166,4 +173,9 @@ h1 {
 
 .winbtn:hover {
 	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.fa-check-circle {
+	font-size: 10em;
+	color: #007700;
 }
