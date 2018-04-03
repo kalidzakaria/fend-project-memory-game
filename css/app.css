@@ -181,7 +181,6 @@ h1 {
 
 .checkanimate {
 	animation: check .4s linear 0.1s;
-	perspective: 500px;
 }
 
 @keyframes check {
