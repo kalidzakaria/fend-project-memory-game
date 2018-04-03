@@ -150,7 +150,6 @@ h1 {
 	width: 60%;
 	transform-origin: 0% 0%;
 	animation: winning .4s linear 0.1s;
-	perspective: 500px;
 }
 
 @keyframes winning {
@@ -178,4 +177,14 @@ h1 {
 .fa-check-circle {
 	font-size: 10em;
 	color: #007700;
+}
+
+.checkanimate {
+	animation: check .4s linear 0.1s;
+	perspective: 500px;
+}
+
+@keyframes check {
+	0%   {transform: rotateY(0)}
+    100% {transform: rotateY(360deg)}
 }

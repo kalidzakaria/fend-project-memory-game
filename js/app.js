@@ -127,9 +127,12 @@ function winningScreen () {
 	document.querySelector(".score-panel").style.display = "none";
 	document.querySelector(".win-container").style.display = "flex";
 	document.querySelector(".win-text").textContent = "With " + moveCounter + " Moves and " + starCounter + " Stars.";
-	document.querySelector(".winbtn").addEventListener("click", playAgain);	
+	document.querySelector(".winbtn").addEventListener("click", playAgain);
+	
+	document.querySelector(".win-container").addEventListener("animationend", function() {
+		document.querySelector(".fa-check-circle").classList.add("checkanimate");
+	})
 }
-
 function playAgain () {
 	moveCounter = 0;
 	starCounter = 3;
@@ -149,6 +152,7 @@ function playAgain () {
 	for (const card of cardArray) {
 		card.classList.remove(...cardClasses);
 	}
+	document.querySelector(".fa-check-circle").classList.remove("checkanimate");
 	shuffleCards();
 }
 
