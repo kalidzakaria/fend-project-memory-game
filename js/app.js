@@ -50,6 +50,7 @@ shuffleCards(); //To shuffle the cards each time the browser loads
 document.querySelector(".deck").addEventListener("click", cardClicked); //Event listner for cards
 let cardList = []; //array of open cards, contains clicked cards
 let moveCounter = 0;
+let starCounter = 3;
 let matchedCards = 0;
 
 function cardClicked(event) {
@@ -84,6 +85,9 @@ function matched() {
 	cardList[1].classList.add("match");
 	cardList = [];
 	matchedCards += 1;
+	if (matchedCards === 8) {
+		winningScreen();
+	}
 }
 
 function notMatched() {
@@ -92,9 +96,10 @@ function notMatched() {
 	setTimeout(removeClasses, 800 );
 	
 }
+const notMatchedClasses = ["open", "show", "notmatched"]
 function removeClasses() {
-				cardList[0].classList.remove("open", "show", "notmatched");
-				cardList[1].classList.remove("open", "show", "notmatched");
+				cardList[0].classList.remove(...notMatchedClasses);
+				cardList[1].classList.remove(...notMatchedClasses);
 				cardList = [];
 			}
 
@@ -106,10 +111,44 @@ function incMoveCounter() {
 function stars() {
 	if (moveCounter > 15) {
 		let evaluation = document.getElementsByClassName("fa-star");
-		evaluation[2].classList.add("fa-star-o");		
+		evaluation[2].classList.add("fa-star-o");
+		starCounter = 2;
 	}
 	if (moveCounter > 25) {
 		let evaluation = document.getElementsByClassName("fa-star");
-		evaluation[1].classList.add("fa-star-o");		
+		evaluation[1].classList.add("fa-star-o");
+		starCounter -= 1;
 	}
 }
+
+function winningScreen () {
+	document.querySelector(".deck").style.display = "none";
+	document.querySelector(".score-panel").style.display = "none";
+	document.querySelector(".win-container").style.display = "flex";
+	document.querySelector(".win-text").textContent = "With " + moveCounter + " Moves and " + starCounter + " Stars.";
+	document.querySelector(".winbtn").addEventListener("click", playAgain);	
+}
+
+function playAgain () {
+	moveCounter = 0;
+	starCounter = 3;
+	matchedCards = 0;
+	document.querySelector(".moves").innerText = moveCounter;
+	document.querySelector(".win-container").style.display = "none";
+	document.querySelector(".deck").style.display = "flex";
+	document.querySelector(".score-panel").style.display = "";
+	let evaluation = document.getElementsByClassName("fa-star");
+	if (evaluation[2].classList.contains("fa-star-o")) {
+		evaluation[2].classList.remove("fa-star-o");
+	}
+	if (evaluation[1].classList.contains("fa-star-o")) {
+		evaluation[1].classList.remove("fa-star-o");
+	}
+	const cardClasses = ["open", "show", "match"];
+	for (const card of cardArray) {
+		card.classList.remove(...cardClasses);
+	}
+	shuffleCards();
+}
+
+document.querySelector(".restart").addEventListener("click", playAgain);
