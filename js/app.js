@@ -21,7 +21,7 @@ function shuffleCards(){
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -52,6 +52,9 @@ let cardList = []; //array of open cards, contains clicked cards
 let moveCounter = 0;
 let starCounter = 3;
 let matchedCards = 0;
+let second = 0;
+let minute = 0;
+let hour = 0;
 
 function cardClicked(event) {
 	//Prevent adding open or matched cards
@@ -134,6 +137,8 @@ function winningScreen () {
 	})
 }
 function playAgain () {
+	second = 0;
+	minute = 0;
 	moveCounter = 0;
 	starCounter = 3;
 	matchedCards = 0;
@@ -156,4 +161,24 @@ function playAgain () {
 	shuffleCards();
 }
 
-document.querySelector(".restart").addEventListener("click", playAgain);
+document.querySelector(".restart").addEventListener("click", playAgain); // restart button Event Listner
+
+//Time Counter
+const timeCounter = document.querySelector(".time-count");
+(function countTime() {
+	showTime();
+	second++;
+	let setTime = setTimeout(countTime, 1000);
+	}) ();
+
+function showTime() {
+	if (second === 60) {
+		second = 0;
+		minute += 1;
+	}
+	if (minute === 60) {
+		minute = 0;
+		hour +=1;
+	}
+	timeCounter.textContent = "Time: " + hour + ":" + minute + ":" + second;
+}
