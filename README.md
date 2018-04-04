@@ -2,8 +2,12 @@
 
 ## Table of Contents
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+* [Instructions](#instructions) : Test your memory and match cards to win the game.
+* [Contributing](#contributing) : Khaled Zakaria version of the project.
+
+## Prerequisites
+
+Built with pure HTML, CSS and Javascript. No need to install any sotware.
 
 ## Instructions
 
