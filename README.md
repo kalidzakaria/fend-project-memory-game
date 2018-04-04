@@ -1,20 +1,5 @@
 # Memory Game Project
 
-## Table of Contents
-
-* [Instructions](#instructions)
-* [Contributing](#contributing)
-
-## Instructions
-
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
-
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
-
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+## instructions
+Test your memory and match cards to win the game. Eight pairs of cards (16 cards) have to be matched to win the game. When you start playing a timer starts to calculate the time it takes you to win the game also you'll have a 3 star rating based on the number of moves you make.
+A move is the act of selecting 2 cards. If your moves to win tha game are less than or equal to 15, you'll have a 3 star rating. If your moves are less than or equal to 25 moves, you'll have a 2 star rating. If your moves are more than 25 moves, you'll have 1 star rating. You also have a reset button to reset the game, timer and star rating. When you win the game, you'll have a screen that tells you the number of moves, the star rating and the time to win the game.
