@@ -55,6 +55,7 @@ let matchedCards = 0;
 let second = 0;
 let minute = 0;
 let hour = 0;
+let clearme = false;
 
 function cardClicked(event) {
 	//Prevent adding open or matched cards
@@ -89,6 +90,7 @@ function matched() {
 	cardList = [];
 	matchedCards += 1;
 	if (matchedCards === 8) {
+		clearme = true;
 		setTimeout(winningScreen,650);
 	}
 }
@@ -135,10 +137,17 @@ function winningScreen () {
 	document.querySelector(".win-container").addEventListener("animationend", function() {
 		document.querySelector(".fa-check-circle").classList.add("checkanimate");
 	})
+	if (hour === 0) {
+		document.querySelector(".show-time").textContent = "Your time: " + minute + " minutes and " + second + " soconds";
+	} else {
+			document.querySelector(".show-time").textContent = "Your time: " + hour + " hour, " + minute + " minutes and " + second + " soconds";
+	}
 }
-function playAgain () {
+function restart () {
 	second = 0;
 	minute = 0;
+	hour = 0;
+	clearme = false;
 	moveCounter = 0;
 	starCounter = 3;
 	matchedCards = 0;
@@ -161,15 +170,24 @@ function playAgain () {
 	shuffleCards();
 }
 
-document.querySelector(".restart").addEventListener("click", playAgain); // restart button Event Listner
+function playAgain() {
+	restart();
+	countTime();
+}
+
+document.querySelector(".restart").addEventListener("click", restart); // restart button Event Listner
 
 //Time Counter
 const timeCounter = document.querySelector(".time-count");
-(function countTime() {
-	showTime();
-	second++;
-	let setTime = setTimeout(countTime, 1000);
-	}) ();
+function countTime() {
+	if (clearme) {
+		clearTimeout(showTime);
+		} else {
+			showTime();
+			second++;
+			let setTime = setTimeout(countTime, 1000);
+		}
+	}
 
 function showTime() {
 	if (second === 60) {
@@ -180,5 +198,11 @@ function showTime() {
 		minute = 0;
 		hour +=1;
 	}
-	timeCounter.textContent = "Time: " + hour + ":" + minute + ":" + second;
+	if (hour > 0) {
+		timeCounter.textContent = "Time: " + hour + ":" + minute + ":" + second;
+	} else {
+			timeCounter.textContent = "Time: " + minute + ":" + second;
+	}
 }
+
+countTime(); //Start counting time
