@@ -56,8 +56,10 @@ let second = 0;
 let minute = 0;
 let hour = 0;
 let clearme = false;
+let start = true;
 
 function cardClicked(event) {
+	if (start) {countTime(); start = false;} //Start counting time
 	//Prevent adding open or matched cards
 	if (event.target.tagName === "LI" && !(event.target.classList.contains("match") || event.target.classList.contains("open"))) {
 		if (cardList.length < 2) {showCard(event);} //Prevent showing three cards bug
@@ -91,6 +93,7 @@ function matched() {
 	matchedCards += 1;
 	if (matchedCards === 8) {
 		clearme = true;
+		start = true;
 		setTimeout(winningScreen,650);
 	}
 }
@@ -132,7 +135,7 @@ function winningScreen () {
 	document.querySelector(".score-panel").style.display = "none";
 	document.querySelector(".win-container").style.display = "flex";
 	document.querySelector(".win-text").textContent = "With " + moveCounter + " Moves and " + starCounter + " Stars.";
-	document.querySelector(".winbtn").addEventListener("click", playAgain);
+	document.querySelector(".winbtn").addEventListener("click", restart);
 	
 	document.querySelector(".win-container").addEventListener("animationend", function() {
 		document.querySelector(".fa-check-circle").classList.add("checkanimate");
@@ -147,7 +150,10 @@ function restart () {
 	second = 0;
 	minute = 0;
 	hour = 0;
-	clearme = false;
+	showTime();
+	if (matchedCards === 8) {clearme = false;} else {clearme = true;}
+	setTimeout(function(){clearme = false}, 1000);
+	start = true;
 	moveCounter = 0;
 	starCounter = 3;
 	matchedCards = 0;
@@ -168,11 +174,6 @@ function restart () {
 	}
 	document.querySelector(".fa-check-circle").classList.remove("checkanimate");
 	shuffleCards();
-}
-
-function playAgain() {
-	restart();
-	countTime();
 }
 
 document.querySelector(".restart").addEventListener("click", restart); // restart button Event Listner
@@ -204,5 +205,4 @@ function showTime() {
 			timeCounter.textContent = "Time: " + minute + ":" + second;
 	}
 }
-
-countTime(); //Start counting time
+showTime();
