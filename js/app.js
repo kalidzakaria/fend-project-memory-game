@@ -19,7 +19,11 @@ function shuffleCards(){
 	document.querySelector(".deck").appendChild(myDocFrag);
 }
 
-// Shuffle function from http://stackoverflow.com/a/2450976
+/**
+ * Shuffle function from http://stackoverflow.com/a/2450976
+ * @description Shuffles array elements randomly
+ * @param {array} - array of cards
+ */
 function shuffle(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -58,6 +62,10 @@ let hour = 0;
 let clearme = false;
 let start = true;
 
+/**
+* @description Triggers when a card is clicked
+* @param event
+*/
 function cardClicked(event) {
 	if (start) {countTime(); start = false;} //Start counting time
 	//Prevent adding open or matched cards
@@ -78,14 +86,27 @@ function cardClicked(event) {
 	}
 }
 
+/**
+* @description show card when clicked by adding classes "open", "show"
+* @param event
+*/
 function showCard(event) {
 	event.target.classList.add("open", "show");
 }
 
+/**
+* @description push the clicked card to cardList
+* @param {array} cardList
+* @param event
+*/
 function addCardToList(event,cardList) {
 	cardList.push(event.target);
 }
 
+
+/**
+* @description locks the cards in open position by adding class "match" and calls winningScreen if all are matched
+*/
 function matched() {
 	cardList[0].classList.add("match");
 	cardList[1].classList.add("match");
@@ -98,24 +119,38 @@ function matched() {
 	}
 }
 
+/**
+* @description Animate cards if not matched and call removeClasses to hide them again
+*/
 function notMatched() {
 	cardList[0].classList.add("notmatched");
 	cardList[1].classList.add("notmatched");
 	setTimeout(removeClasses, 800 );
 	
 }
-const notMatchedClasses = ["open", "show", "notmatched"]
+
+const notMatchedClasses = ["open", "show", "notmatched"];
+
+/**
+* @description hide the cards by removing classes "open", "show" and "notmatched"
+*/
 function removeClasses() {
 				cardList[0].classList.remove(...notMatchedClasses);
 				cardList[1].classList.remove(...notMatchedClasses);
 				cardList = [];
 			}
 
+/**
+* @description increment move counter a move is the process of opening two cards
+*/
 function incMoveCounter() {
 	moveCounter += 1;
 	document.querySelector(".moves").innerText = moveCounter;
 }
 
+/**
+* @description update Star rating based on number of moves
+*/
 function stars() {
 	if (moveCounter > 15) {
 		let evaluation = document.getElementsByClassName("fa-star");
@@ -129,6 +164,9 @@ function stars() {
 	}
 }
 
+/**
+* @description Congratulate the player and show his time, star rating and number of moves to win the game
+*/
 function winningScreen () {
 	
 	document.querySelector(".deck").style.display = "none";
@@ -139,13 +177,17 @@ function winningScreen () {
 	
 	document.querySelector(".win-container").addEventListener("animationend", function() {
 		document.querySelector(".fa-check-circle").classList.add("checkanimate");
-	})
+	});
 	if (hour === 0) {
 		document.querySelector(".show-time").textContent = "Your time: " + minute + " minutes and " + second + " soconds";
 	} else {
 			document.querySelector(".show-time").textContent = "Your time: " + hour + " hour, " + minute + " minutes and " + second + " soconds";
 	}
 }
+
+/**
+* @description restart the game and reset time, star rating and number of move 
+*/
 function restart () {
 	second = 0;
 	minute = 0;
@@ -178,8 +220,11 @@ function restart () {
 
 document.querySelector(".restart").addEventListener("click", restart); // restart button Event Listner
 
-//Time Counter
 const timeCounter = document.querySelector(".time-count");
+
+/**
+* @description Time counter to calculate the player time 
+*/
 function countTime() {
 	if (clearme) {
 		clearTimeout(showTime);
@@ -190,6 +235,9 @@ function countTime() {
 		}
 	}
 
+/**
+* @description update time to the player while his playing 
+*/	
 function showTime() {
 	if (second === 60) {
 		second = 0;
